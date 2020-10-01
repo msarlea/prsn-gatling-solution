@@ -9,7 +9,6 @@ import scala.concurrent.duration.DurationInt
 
 /**
   * This class contains the code necessary to run the Gatling prsn solution
-  *
   */
 class PersonsBaseline extends Simulation {
 
@@ -86,7 +85,7 @@ class PersonsBaseline extends Simulation {
           .pause(thinktime_min,thinktime_max)
       }
       // user performs 10 subsequent searches for persons by the names taken from the first page of all persons list.
-      .exec( http("[GET] -> Scrape 1st Person page")
+      .exec( http("[GET] -> Scrape 1st Person page") // could also be renamed to /persons/_pageNo_ and could also use 
         .get("persons/1")
         .check(jsonPath("$[0:9].name")
           .findAll
@@ -112,8 +111,8 @@ class PersonsBaseline extends Simulation {
 
 /*************************** VARIABLES ***********************/
   // runtime variables - MVN CLI
-  def userCount: Int =  getProperty("USERS", "30").toInt
-  def rampDuration: Int = getProperty("RAMP_DURATION", "600").toInt
+  def userCount: Int =  getProperty("USERS", "15").toInt
+  def rampDuration: Int = getProperty("RAMP_DURATION", "300").toInt
   def testDuration: Int = getProperty("DURATION", "600").toInt
   def thinktime_min: Int = getProperty("THINKTIME_MIN", "1").toInt
   def thinktime_max: Int = getProperty("THINKTIME_MAX", "10").toInt
